@@ -6,25 +6,72 @@
   <title>Avatar IA Flottant</title>
   <style>
     body {
-      background-color: #f9f9f9;
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
     }
-    .avatar {
-      width: 128px;
+
+    .avatar-wrapper {
+      position: relative;
+      width: 240px;
+      overflow: hidden;
+      border-radius: 16px;
       animation: float 3s ease-in-out infinite;
+      background: transparent;
+      display: inline-block;
     }
+
+    .avatar {
+      width: 100%;
+      display: block;
+    }
+
+    .avatar-wrapper::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.46) 0%,
+        rgba(0, 0, 0, 0.38) 40%,
+        rgba(0, 0, 0, 0.15) 60%,
+        transparent 80%
+      );
+      mix-blend-mode: multiply;
+      transform-origin: top center;
+      transform: scaleY(0);
+      animation: blink 5.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-6px); }
       100% { transform: translateY(0); }
     }
+
+    @keyframes blink {
+      0%,
+      12%,
+      14%,
+      58%,
+      60%,
+      100% {
+        transform: scaleY(0);
+      }
+      13%,
+      59% {
+        transform: scaleY(1);
+      }
+    }
   </style>
 </head>
 <body>
-  <img src="avatar_ia_floating.webp" alt="Avatar IA" class="avatar">
+  <div class="avatar-wrapper" aria-hidden="false">
+    <img src="avatar_realistic_heart.webp" alt="Avatar coeur bleu en forme de mètre ruban" class="avatar">
+  </div>
 </body>
 </html>
